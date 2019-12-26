@@ -1,6 +1,6 @@
 #include "postgres.h"
 #include "executor/spi.h"
-saaaaaaaaaaaaaaaaaaaaassssssssssss
+sssssssssssss
 #include "access/htup_details.h"
 #include "catalog/pg_type.h"
 #include "commands/trigger.h"
