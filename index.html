@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>营销流程科技看板</title>
+    <style>
+      :root {
+        --bg: #071225;
+        --panel: rgba(16, 33, 61, 0.85);
+        --panel-border: #2b5b9b;
+        --main-card: rgba(25, 53, 92, 0.9);
+        --main-border: #66b5ff;
+        --side-card: rgba(18, 44, 73, 0.92);
+        --side-border: #3f8ee6;
+        --orange: #ff8b2b;
+        --blue: #2f9bff;
+        --text: #eaf4ff;
+        --muted: #98b8da;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at 30% 20%, #0f2d52 0%, #071225 42%, #030914 100%);
+      }
+
+      .dashboard {
+        position: relative;
+        width: min(1800px, 96vw);
+        height: min(1000px, 92vh);
+        border: 1px solid #2b4f84;
+        border-radius: 20px;
+        overflow: hidden;
+        background: linear-gradient(180deg, rgba(10, 23, 44, 0.95), rgba(4, 14, 28, 0.98));
+        box-shadow: 0 0 60px rgba(49, 140, 255, 0.25), inset 0 0 40px rgba(46, 128, 241, 0.15);
+      }
+
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(73, 117, 175, 0.12) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(73, 117, 175, 0.12) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: radial-gradient(circle at center, black 42%, transparent 100%);
+      }
+
+      .columns {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .column {
+        position: relative;
+        border-right: 1px solid rgba(88, 134, 194, 0.4);
+        background: linear-gradient(180deg, rgba(14, 34, 61, 0.5), rgba(8, 20, 39, 0.2));
+      }
+
+      .column:last-child {
+        border-right: none;
+      }
+
+      .col-title {
+        margin: 0;
+        height: 96px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 42px;
+        letter-spacing: 1px;
+        color: #d8ecff;
+        border-bottom: 1px solid rgba(88, 134, 194, 0.45);
+        background: linear-gradient(180deg, rgba(27, 60, 106, 0.75), rgba(11, 29, 53, 0.65));
+        text-shadow: 0 0 14px rgba(107, 183, 255, 0.7);
+      }
+
+      .node {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        line-height: 1.3;
+        font-size: 35px;
+        color: var(--text);
+        z-index: 2;
+      }
+
+      .node.main {
+        width: 180px;
+        min-height: 88px;
+        padding: 16px 12px;
+        background: var(--main-card);
+        border: 2px solid var(--main-border);
+        border-radius: 10px;
+        box-shadow: 0 0 18px rgba(92, 177, 255, 0.25);
+      }
+
+      .node.side {
+        width: 132px;
+        min-height: 66px;
+        padding: 8px 10px;
+        background: var(--side-card);
+        border: 2px solid var(--side-border);
+        clip-path: polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%);
+        color: var(--muted);
+        font-size: 31px;
+      }
+
+      svg.links {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      .links path {
+        fill: none;
+        stroke-width: 4;
+      }
+
+      .blue {
+        stroke: var(--blue);
+        filter: drop-shadow(0 0 6px rgba(47, 155, 255, 0.7));
+      }
+
+      .orange {
+        stroke: var(--orange);
+        filter: drop-shadow(0 0 6px rgba(255, 139, 43, 0.7));
+      }
+
+      .editor {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 120px;
+        min-height: 90px;
+      }
+
+      @media (max-width: 1600px) {
+        .dashboard {
+          transform: scale(0.82);
+          transform-origin: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="dashboard">
+      <div class="grid" aria-hidden="true"></div>
+
+      <div class="columns">
+        <section class="column">
+          <h2 class="col-title">获客（新媒体部门）</h2>
+
+          <div class="node main" style="left: 76px; top: 148px">文案选题</div>
+          <div class="node main" style="left: 76px; top: 386px">视频生成</div>
+          <div class="node main" style="left: 76px; top: 618px">视频发布</div>
+          <div class="node main" style="left: 76px; top: 845px">意向咨询</div>
+
+          <div class="node side" style="left: 260px; top: 164px">热点选题</div>
+          <div class="node side" style="left: 260px; top: 238px">AI文案扩写</div>
+          <div class="node side" style="left: 260px; top: 312px">AI视频脚本扩写</div>
+
+          <div class="node side" style="left: 260px; top: 402px">数字人视频</div>
+          <div class="node side" style="left: 260px; top: 476px">真人拍摄</div>
+          <div class="node side" style="left: 260px; top: 550px">视频混剪</div>
+
+          <div class="node side" style="left: 260px; top: 636px">矩阵发布</div>
+
+          <div class="node side" style="left: 244px; top: 862px">私信聚合</div>
+          <div class="node side" style="left: 244px; top: 936px">智能客服</div>
+        </section>
+
+        <section class="column">
+          <h2 class="col-title">线索移交</h2>
+          <div class="node main" style="left: 140px; top: 148px">线索分配</div>
+          <div class="node side" style="left: 172px; top: 250px">账号权限</div>
+        </section>
+
+        <section class="column">
+          <h2 class="col-title">私域成交（销售部门）</h2>
+
+          <div class="node main" style="left: 114px; top: 148px">销售跟进</div>
+          <div class="node main" style="left: 114px; top: 356px">销售成交</div>
+          <div class="node main" style="left: 114px; top: 558px">客户复购</div>
+
+          <div class="node side" style="left: 296px; top: 164px">线索管理</div>
+          <div class="node side" style="left: 296px; top: 238px">销售话术库</div>
+          <div class="node side" style="left: 296px; top: 312px">跟进记录</div>
+          <div class="node side" style="left: 296px; top: 386px">AI分析跟进质量</div>
+          <div class="node side" style="left: 296px; top: 460px">AI分析销售成交率</div>
+        </section>
+      </div>
+
+      <svg class="links" viewBox="0 0 1800 1000" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <marker id="arrowBlue" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+            <polygon points="0 0, 9 4.5, 0 9" fill="#2f9bff" />
+          </marker>
+          <marker id="arrowOrange" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+            <polygon points="0 0, 9 4.5, 0 9" fill="#ff8b2b" />
+          </marker>
+        </defs>
+
+        <path class="blue" d="M255 192 L330 192" marker-end="url(#arrowBlue)" />
+        <path class="orange" d="M166 236 L166 386" marker-end="url(#arrowOrange)" />
+        <path class="blue" d="M255 430 L330 430" marker-end="url(#arrowBlue)" />
+        <path class="orange" d="M166 476 L166 618" marker-end="url(#arrowOrange)" />
+        <path class="blue" d="M255 662 L330 662" marker-end="url(#arrowBlue)" />
+        <path class="orange" d="M166 706 L166 845" marker-end="url(#arrowOrange)" />
+        <path class="blue" d="M166 930 L305 930" marker-end="url(#arrowBlue)" />
+
+        <path class="orange" d="M174 884 L748 884 L748 192" marker-end="url(#arrowOrange)" />
+
+        <path class="orange" d="M920 192 L1230 192" marker-end="url(#arrowOrange)" />
+        <path class="orange" d="M1320 236 L1320 356" marker-end="url(#arrowOrange)" />
+        <path class="orange" d="M1320 446 L1320 558" marker-end="url(#arrowOrange)" />
+
+        <path class="blue" d="M1410 192 L1490 192" marker-end="url(#arrowBlue)" />
+        <path class="blue" d="M1410 386 L1490 386" marker-end="url(#arrowBlue)" />
+      </svg>
+
+      <div class="node main editor">视频剪辑师</div>
+    </main>
+  </body>
+</html>
